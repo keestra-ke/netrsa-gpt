@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/netrsa-gpt/', // This line is critical for GitHub Pages
+  base: '/netrsa-gpt/', // This MUST match your repo name
 })
