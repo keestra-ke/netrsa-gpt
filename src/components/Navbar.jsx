@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Scan, Users, Menu, X } from 'lucide-react';
 
 const navItems = [
-  { to: '/', label: 'Home' },
+  { to: '/', label: 'Feed', end: true },
   { to: '/listings', label: 'Houses' },
-  { to: '/marketplace', label: 'Marketplace' },
-  { to: '/map', label: 'Map' },
-  { to: '/pulse', label: 'Building Pulse' },
-  { to: '/jobs', label: 'Inner Jobs' },
+  { to: '/map', label: 'Mtaa View' },
+  { to: '/services', label: 'Services' },
+  { to: '/community', label: 'Community' }
 ];
 
 function Navbar() {
@@ -17,17 +16,19 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="container nav-content">
-        <Link to="/" className="logo" onClick={() => setIsOpen(false)}>
+        <NavLink to="/" className="logo" onClick={() => setIsOpen(false)}>
           <div className="logo-icon">
             <Scan size={24} color="white" />
           </div>
           <span>Keja Scan</span>
-        </Link>
+        </NavLink>
 
         <ul className="nav-links">
           {navItems.map((item) => (
             <li key={item.to}>
-              <Link to={item.to}>{item.label}</Link>
+              <NavLink to={item.to} end={item.end}>
+                {item.label}
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -35,7 +36,7 @@ function Navbar() {
         <div className="nav-actions">
           <button className="btn btn-primary nav-signin" type="button">
             <Users size={18} />
-            Sign In
+            Link my residence
           </button>
           <button
             className="nav-toggle"
@@ -53,9 +54,9 @@ function Navbar() {
         <ul className="mobile-nav">
           {navItems.map((item) => (
             <li key={item.to}>
-              <Link to={item.to} onClick={() => setIsOpen(false)}>
+              <NavLink to={item.to} end={item.end} onClick={() => setIsOpen(false)}>
                 {item.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>

@@ -1,8 +1,18 @@
-# Nestra / Keja Scan
+# Keja Scan Kenya (Vacant Kenya)
 
-Nestra is a GPS-based housing platform that maps vacant rooms, apartments, and estates in Nairobi. This repo is the Stage 1 website: a React demo of listings, Building Pulse, Inner Jobs, marketplace, and a map placeholder.
+Stage 1 website for a GPS housing and estate-life map of Nairobi. You open a live feed — not a search bar — then explore houses, **Mtaa View**, services, and the community board.
 
 Live site: [keestra-ke.github.io/netrsa-gpt](https://keestra-ke.github.io/netrsa-gpt/)
+
+## Demo routes
+
+- `/` live housing feed
+- `/listings` deep search · `/listings/:id` full room (rules, utilities, caretaker)
+- `/map` Mtaa View layers (housing, services, community)
+- `/services` movers, vibarua, water, security, network, venues, door breaker
+- `/community` building notices · `/pulse` `/jobs` `/marketplace`
+
+Dummy Nairobi data only. No backend or M-Pesa yet. The long product write-up is `vacant_kenya_concept.md`.
 
 ## Local development
 
@@ -11,17 +21,9 @@ npm ci
 npm run dev
 ```
 
-Then open the URL Vite prints (usually `http://localhost:5173/`).
-
 ```bash
 npm run build
 npm run preview
 ```
 
-## Deploy
-
-Pushes to `main` run `.github/workflows/deploy.yml`, which builds the Vite app and deploys `dist/` to GitHub Pages at `/netrsa-gpt/`.
-
-## Product notes
-
-The full product vision lives in `vacant_kenya_concept.md`. The UI currently uses dummy Nairobi data; there is no backend yet.
+Pushes to `main` deploy `dist/` to GitHub Pages at `/netrsa-gpt/`.

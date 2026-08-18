@@ -36,6 +36,28 @@
 
 ---
 
+## FOUNDER'S VOICE (REFINED)
+
+This idea comes from something very real in Nairobi. People are always searching for houses — not online, physically. You hear: “Do you know any vacant house around here?” Most of the time the answer is no. So they walk. House to house. Building to building. Especially in places like Githurai and Baba Dogo: stacked floors, single rooms at around KSh 4,000, bedsitters at 5,500, one-bedrooms at 8,000–10,000. The real problem is not rent. The real problem is people do not know what exists until they go there — and even then they still do not know water, power, security, Wi-Fi, drainage, or how far transport and shops really are.
+
+The product starts here: every house, building, and room already mapped. You open the app and you are already walking inside the estate before you physically go there.
+
+The app does **not** start with search. It starts with a live housing feed (popular, trending, newly posted, promoted, high-activity areas). Flow: **Feed → Explore → Mtaa View → Deep Search**. Each listing carries structure, photos, money (including M-Pesa), ownership, building rules, and real utility conditions. Tenants **link their residence**. Services (movers, vibarua, water, security, network, venues, door breaker) come to the exact house. Alerts go only to people who actually live there.
+
+### Eight modules in the Stage 1 website
+
+| Module | Demo route |
+| --- | --- |
+| Houses | `/listings` and `/listings/:id` |
+| Mtaa View (housing / services / community layers) | `/map` |
+| Movers, vibarua, water, security, network, venues, door breaker | `/services` |
+| Community board + Pulse | `/community`, `/pulse` |
+| Inner Jobs / Neighbour Exchange | `/jobs`, `/marketplace` |
+
+The live site is a dummy-data walkthrough. There is no M-Pesa, GPS, or backend in this repo yet.
+
+---
+
 ## CHAPTER 1: THE ORIGIN — WHERE THIS IDEA STARTED
 
 This idea comes from something very real. Something I noticed personally while working around my neighbourhood in Nairobi. I kept seeing the same problem happening over and over.

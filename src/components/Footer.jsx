@@ -14,19 +14,20 @@ function Footer() {
               <span>Keja Scan</span>
             </Link>
             <p style={{ opacity: 0.8, lineHeight: 1.8 }}>
-              The Digital Life of the Kenyan Estate. Find vacant houses, track utilities, 
-              connect with neighbors, and build your community reputation.
+              Vacant Kenya. A live map of houses, caretakers, water, work, and community —
+              so you are already walking the estate before you physically go there.
             </p>
           </div>
           
           <div>
             <h3>Quick Links</h3>
             <ul>
-              <li><Link to="/listings">Find a House</Link></li>
-              <li><Link to="/marketplace">Marketplace</Link></li>
-              <li><Link to="/map">Live Map</Link></li>
-              <li><Link to="/pulse">Building Pulse</Link></li>
+              <li><Link to="/listings">Houses</Link></li>
+              <li><Link to="/map">Mtaa View</Link></li>
+              <li><Link to="/services">Services</Link></li>
+              <li><Link to="/community">Community</Link></li>
               <li><Link to="/jobs">Inner Jobs</Link></li>
+              <li><Link to="/marketplace">Neighbour Exchange</Link></li>
             </ul>
           </div>
           
@@ -35,10 +36,10 @@ function Footer() {
             <ul>
               <li>Githurai 44 & 45</li>
               <li>Baba Dogo</li>
+              <li>Huruma & Mathare</li>
               <li>Kasarani Mwiki</li>
               <li>Kayole Komarock</li>
-              <li>Roysambu</li>
-              <li>Pipeline</li>
+              <li>Roysambu & Pipeline</li>
             </ul>
           </div>
           
@@ -64,7 +65,7 @@ function Footer() {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2025 Keja Scan. All rights reserved. | Scan. Find. Move.</p>
+          <p>&copy; 2026 Keja Scan Kenya. Scan. Find. Move. Live.</p>
         </div>
       </div>
     </footer>
