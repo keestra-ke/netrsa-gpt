@@ -1,9 +1,8 @@
-```
 # Dependencies
 node_modules/
 
 # Build artifacts
-keja-scan/dist/
+dist/
 
 # Environment variables
 .env
@@ -41,11 +40,8 @@ __pycache__/
 # Vite
 .vite/
 
-# Package manager
-package-lock.json
+# Package manager noise
 .yarn/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-```
