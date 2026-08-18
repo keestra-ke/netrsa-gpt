@@ -167,6 +167,25 @@ body {
   opacity: 1;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.mobile-nav {
+  display: none;
+}
+
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--ocean-blue) 100%);
@@ -454,11 +473,32 @@ body {
   .hero h1 {
     font-size: 2rem;
   }
-  
-  .nav-links {
+
+  .nav-links,
+  .nav-signin {
     display: none;
   }
-  
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    list-style: none;
+    padding: 0 20px 16px;
+  }
+
+  .mobile-nav a {
+    display: block;
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 4px;
+    font-weight: 500;
+  }
+
   .features-grid,
   .listings-grid,
   .marketplace-grid {

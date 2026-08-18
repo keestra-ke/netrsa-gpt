@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { MapPin, ZoomIn, ZoomOut } from 'lucide-react';
 import { mapLocations, housingListings } from '../data/dummyData';
 
@@ -98,9 +99,9 @@ function MapView() {
                   Across {mapLocations.length} estates in Nairobi
                 </div>
               </div>
-              <button className="btn btn-primary">
+              <Link to="/listings" className="btn btn-primary">
                 View All Listings
-              </button>
+              </Link>
             </div>
           </div>
         </div>
