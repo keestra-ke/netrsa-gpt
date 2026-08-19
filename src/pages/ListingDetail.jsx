@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 import { getListing } from '../data/dummyData';
+import BookingFlow from '../components/BookingFlow';
 
 function Row({ label, value }) {
   return (
@@ -14,6 +16,7 @@ function Row({ label, value }) {
 function ListingDetail() {
   const { id } = useParams();
   const listing = getListing(id);
+  const [booking, setBooking] = useState(false);
 
   if (!listing) {
     return (
@@ -100,10 +103,14 @@ function ListingDetail() {
         </div>
 
         <div className="detail-actions">
-          <button className="btn btn-primary" type="button">Talk to caretaker first</button>
+          <button className="btn btn-primary" type="button" onClick={() => setBooking(true)}>
+            Talk to caretaker &amp; pay deposit
+          </button>
           <Link to="/map" className="btn btn-secondary">See it on Mtaa View</Link>
         </div>
       </div>
+
+      {booking ? <BookingFlow listing={listing} onClose={() => setBooking(false)} /> : null}
     </div>
   );
 }

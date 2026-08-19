@@ -786,6 +786,162 @@ body {
   z-index: 2;
 }
 
+/* Booking flow modal (demo escrow + M-Pesa) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 22, 40, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2000;
+}
+
+.modal-card {
+  position: relative;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(10, 22, 40, 0.4);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--ocean-surface);
+  border: none;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+}
+
+.modal-close:hover {
+  background: #d4e5ed;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--ocean-surface);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  min-height: 180px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.chat-you {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--ocean-light) 0%, var(--ocean-blue) 100%);
+  color: var(--white);
+  border-bottom-right-radius: 4px;
+}
+
+.chat-them {
+  align-self: flex-start;
+  background: var(--white);
+  color: var(--text-primary);
+  border: 1px solid #d4e5ed;
+  border-bottom-left-radius: 4px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 16px 0 8px;
+  color: var(--ocean-blue);
+}
+
+.field-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #d4e5ed;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: var(--ocean-light);
+}
+
+.phone-prompt {
+  background: #063d2f;
+  color: #d1fae5;
+  border-radius: 12px;
+  padding: 18px;
+  margin: 16px 0;
+  font-size: 0.95rem;
+}
+
+.phone-prompt-title {
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #6ee7b7;
+  margin-bottom: 6px;
+}
+
+.phone-prompt-meta {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-top: 8px;
+}
+
+.flow-success {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.flow-success h4 {
+  color: var(--ocean-blue);
+  font-size: 1.3rem;
+  margin: 10px 0 8px;
+}
+
+.flow-success .detail-actions {
+  justify-content: center;
+}
+
+.flow-error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero h1 {
