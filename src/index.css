@@ -786,6 +786,109 @@ body {
   z-index: 2;
 }
 
+a.btn {
+  text-decoration: none;
+  justify-content: center;
+}
+
+.narrow {
+  max-width: 720px;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.role-card {
+  text-align: left;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.role-card.is-selected {
+  border-color: var(--ocean-light);
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.form-card label,
+.form-card fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--ocean-blue);
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+  font: inherit;
+  font-weight: 400;
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.check-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+.check {
+  flex-direction: row !important;
+  align-items: center;
+  font-weight: 500 !important;
+  color: var(--text-primary) !important;
+}
+
+.form-error {
+  color: var(--danger);
+}
+
+.photo-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.photo-row img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.map-preview {
+  background: var(--ocean-surface);
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+.stat-value.dark {
+  color: var(--ocean-blue);
+}
+
+.dash-stats {
+  margin-bottom: 20px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero h1 {
@@ -835,4 +938,135 @@ body {
     width: 100%;
     min-width: 0;
   }
+}
+
+.remote-hint {
+  display: none;
+}
+
+html.tv-mode,
+html.remote-nav {
+  scroll-behavior: smooth;
+}
+
+html.tv-mode .remote-hint,
+html.remote-nav .remote-hint {
+  display: block;
+  position: relative;
+  z-index: 999;
+  background: #0a1628;
+  color: #e0f2fe;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+html.tv-mode,
+html.tv-mode body {
+  font-size: 20px;
+}
+
+html.tv-mode #root {
+  padding: 24px 5% 48px;
+  min-height: 100vh;
+}
+
+html.tv-mode .navbar {
+  margin: 0 -5% 0;
+  padding: 1.2rem 5%;
+}
+
+html.tv-mode .nav-content {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+html.tv-mode .nav-links,
+html.tv-mode .nav-signin {
+  display: flex !important;
+}
+
+html.tv-mode .nav-toggle,
+html.tv-mode .mobile-nav {
+  display: none !important;
+}
+
+html.tv-mode .nav-links {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+html.tv-mode .nav-links a {
+  padding: 12px 18px;
+  border-radius: 8px;
+}
+
+html.tv-mode .btn {
+  min-height: 52px;
+  padding: 14px 28px;
+  font-size: 1.05rem;
+}
+
+html.tv-mode .card {
+  padding: 24px;
+}
+
+html.tv-mode input,
+html.tv-mode select,
+html.tv-mode textarea {
+  min-height: 48px;
+  font-size: 1.05rem;
+}
+
+html.tv-mode .tv-file-note {
+  display: block;
+  margin-top: 6px;
+}
+
+.tv-file-note {
+  display: none;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+html.tv-mode .map-pin {
+  padding: 12px 18px;
+  font-size: 1rem;
+  min-height: 48px;
+}
+
+html.tv-mode .filter-row .btn,
+html.tv-mode .role-card {
+  min-height: 56px;
+}
+
+html.tv-mode a:focus,
+html.tv-mode button:focus,
+html.tv-mode input:focus,
+html.tv-mode select:focus,
+html.tv-mode textarea:focus,
+html.tv-mode [tabindex]:focus,
+html.remote-nav a:focus,
+html.remote-nav button:focus,
+html.remote-nav input:focus,
+html.remote-nav select:focus,
+html.remote-nav textarea:focus,
+html.remote-nav [tabindex]:focus {
+  outline: 4px solid #4da8da;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(77, 168, 218, 0.25);
+  z-index: 2;
+}
+
+html.tv-mode .listing-card:focus,
+html.tv-mode .module-card:focus,
+html.tv-mode .map-pin:focus,
+html.tv-mode .role-card:focus {
+  transform: scale(1.03);
+}
+
+html.tv-mode .btn-primary:hover,
+html.tv-mode .card:hover {
+  transform: none;
 }

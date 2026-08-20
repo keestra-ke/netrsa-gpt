@@ -1,30 +1,37 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { MapPin, Search } from 'lucide-react';
-import { housingListings, listingExtras } from '../data/dummyData';
+import { useSyncExternalStore } from 'react';
+import { getAllListings } from '../lib/listings';
+import { subscribeListings } from '../lib/storage';
 
 function Listings() {
   const [params] = useSearchParams();
   const [filterType, setFilterType] = useState('All');
   const [query, setQuery] = useState(params.get('estate') || '');
+  const allListings = useSyncExternalStore(subscribeListings, getAllListings, getAllListings);
+
+  const types = useMemo(() => {
+    const unique = [...new Set(allListings.map((item) => item.type))];
+    return ['All', ...unique];
+  }, [allListings]);
 
   const filteredListings = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    return housingListings.filter((listing) => {
-      const extra = listingExtras[listing.id] || {};
+    return allListings.filter((listing) => {
       const matchesType = filterType === 'All' || listing.type === filterType;
-      const haystack = `${listing.title} ${listing.location} ${listing.estate} ${extra.plotName || ''}`.toLowerCase();
+      const haystack = `${listing.title} ${listing.location} ${listing.estate} ${listing.plotName || ''}`.toLowerCase();
       const matchesQuery = !needle || haystack.includes(needle);
       return matchesType && matchesQuery;
     });
-  }, [filterType, query]);
+  }, [allListings, filterType, query]);
 
   return (
     <div className="page">
       <div className="container">
         <div className="section-header">
           <h2>Deep search — vacant rooms in Nairobi</h2>
-          <p>Type Githurai, Baba Dogo, Kayole, Kasarani. Then open the room. Floor number matters.</p>
+          <p>Landlords post here. Listings expire after 30 days unless renewed. Type Githurai, Baba Dogo, Kayole, Kasarani.</p>
         </div>
 
         <div className="filter-row">
@@ -37,7 +44,7 @@ function Listings() {
               placeholder="Search by estate, plot, or area..."
             />
           </label>
-          {['All', 'Single Room', 'Bedsitter', 'One Bedroom', 'Two Bedroom'].map((type) => (
+          {types.slice(0, 8).map((type) => (
             <button
               key={type}
               type="button"
@@ -49,42 +56,46 @@ function Listings() {
           ))}
         </div>
 
-        <p className="muted">Showing {filteredListings.length} {filteredListings.length === 1 ? 'listing' : 'listings'}</p>
+        <p className="muted">
+          Showing {filteredListings.length} {filteredListings.length === 1 ? 'listing' : 'listings'}
+          {' · '}
+          <Link to="/post">Post a vacancy</Link>
+        </p>
 
         <div className="listings-grid">
-          {filteredListings.map((listing) => {
-            const extra = listingExtras[listing.id] || {};
-            return (
-              <article key={listing.id} className="card listing-card">
-                <img src={listing.image} alt={listing.title} className="listing-image" />
-                <div className="listing-details">
-                  <div className="listing-price">KSh {listing.price.toLocaleString()}/month</div>
-                  <div className="listing-location">
-                    <MapPin size={16} />
-                    {listing.location}
-                  </div>
-                  <div className="listing-title">{listing.title}</div>
-                  <div className="listing-features">
-                    <span className="listing-feature">{listing.type}</span>
-                    <span className="listing-feature">Floor {listing.floor}</span>
-                    <span className="listing-feature">{listing.size}</span>
-                    <span className="listing-feature">{listing.caretaker}</span>
-                  </div>
-                  <div className="detail-badges">
-                    <span className={`badge ${listing.water === 'Constant' ? 'badge-success' : 'badge-warning'}`}>
-                      Water {listing.water}
-                    </span>
-                    <span className="badge badge-info">Power {listing.electricity}</span>
-                    {extra.landlordOnPlot ? <span className="badge badge-info">Landlord on plot</span> : null}
-                  </div>
-                  <div className="detail-actions tight">
-                    <Link to={`/listings/${listing.id}`} className="btn btn-primary">View the room</Link>
-                  </div>
-                  <p className="muted center-note">Posted {listing.posted} · {listing.views} views</p>
+          {filteredListings.map((listing) => (
+            <Link key={listing.id} to={`/listings/${listing.id}`} className="card listing-card listing-link">
+              <img src={listing.image} alt={listing.title} className="listing-image" />
+              <div className="listing-details">
+                <div className="listing-price">KSh {listing.price.toLocaleString()}/month</div>
+                <div className="listing-location">
+                  <MapPin size={16} />
+                  {listing.location}
                 </div>
-              </article>
-            );
-          })}
+                <div className="listing-title">{listing.title}</div>
+                <div className="listing-features">
+                  <span className="listing-feature">{listing.type}</span>
+                  <span className="listing-feature">Floor {listing.floor}</span>
+                  {listing.unitsAvailable > 1 ? (
+                    <span className="listing-feature">{listing.unitsAvailable} units</span>
+                  ) : (
+                    <span className="listing-feature">{listing.size}</span>
+                  )}
+                </div>
+                <div className="detail-badges">
+                  {listing.verified ? <span className="badge badge-success">Verified landlord</span> : null}
+                  {listing.source === 'user' ? <span className="badge badge-info">Posted here</span> : null}
+                  <span className={`badge ${listing.water === 'Constant' ? 'badge-success' : 'badge-warning'}`}>
+                    Water {listing.water}
+                  </span>
+                </div>
+                <div className="detail-actions tight">
+                  <span className="btn btn-primary">View the room</span>
+                </div>
+                <p className="muted center-note">Posted {listing.posted} · {listing.views || 0} views</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

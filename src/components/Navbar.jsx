@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Scan, Users, Menu, X } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { to: '/', label: 'Feed', end: true },
@@ -12,6 +13,7 @@ const navItems = [
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, isLister } = useAuth();
 
   return (
     <nav className="navbar">
@@ -31,18 +33,22 @@ function Navbar() {
               </NavLink>
             </li>
           ))}
+          {isLister && (
+            <li><NavLink to="/post">Post</NavLink></li>
+          )}
         </ul>
 
         <div className="nav-actions">
-          <button className="btn btn-primary nav-signin" type="button">
+          <NavLink to={user ? '/dashboard' : '/auth'} className="btn btn-primary nav-signin" onClick={() => setIsOpen(false)}>
             <Users size={18} />
-            Link my residence
-          </button>
+            {user ? (isLister ? 'Dashboard' : user.name) : 'Sign in'}
+          </NavLink>
           <button
             className="nav-toggle"
             type="button"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
+            tabIndex={-1}
             onClick={() => setIsOpen((open) => !open)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -59,6 +65,14 @@ function Navbar() {
               </NavLink>
             </li>
           ))}
+          {isLister && (
+            <li><NavLink to="/post" onClick={() => setIsOpen(false)}>Post vacancy</NavLink></li>
+          )}
+          <li>
+            <NavLink to={user ? '/dashboard' : '/auth'} onClick={() => setIsOpen(false)}>
+              {user ? 'Dashboard' : 'Sign in'}
+            </NavLink>
+          </li>
         </ul>
       )}
     </nav>
