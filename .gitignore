@@ -40,6 +40,15 @@ __pycache__/
 # Vite
 .vite/
 
+# Android / Capacitor
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+android/captures/
+*.keystore
+*.jks
+
 # Package manager noise
 .yarn/
 npm-debug.log*

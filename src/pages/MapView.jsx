@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
-import { mapLocations, housingListings, serviceDirectory, communityNotices } from '../data/dummyData';
+import { useSyncExternalStore } from 'react';
+import { mapLocations, serviceDirectory, communityNotices } from '../data/dummyData';
+import { getAllListings } from '../lib/listings';
+import { subscribeListings } from '../lib/storage';
 
 const layers = [
   { id: 'housing', label: 'Housing' },
@@ -11,6 +14,11 @@ const layers = [
 
 function MapView() {
   const [layer, setLayer] = useState('housing');
+  const allListings = useSyncExternalStore(subscribeListings, getAllListings, getAllListings);
+  const byEstate = allListings.reduce((acc, item) => {
+    acc[item.estate] = (acc[item.estate] || 0) + (item.unitsAvailable || 1);
+    return acc;
+  }, {});
 
   return (
     <div className="page">
@@ -50,7 +58,7 @@ function MapView() {
             >
               <MapPin size={16} />
               {location.estate}
-              <span>{location.listings}</span>
+              <span>{byEstate[location.estate] || location.listings}</span>
             </Link>
           ))}
           {layer === 'services' && serviceDirectory.filter((item) => ['water', 'locksmith', 'movers', 'security'].includes(item.module)).slice(0, 8).map((item, index) => (
@@ -75,8 +83,8 @@ function MapView() {
           ))}
           <div className="mtaa-legend">
             <div>
-              <strong>{housingListings.length} demo vacancies</strong>
-              <p>Across {mapLocations.length} estates. GPS-verified pins in the real product — this map is the Stage 1 walkthrough.</p>
+              <strong>{allListings.length} vacancies on this device</strong>
+              <p>Demo rooms plus anything a landlord posted here. Pins update when you publish a vacancy.</p>
             </div>
             <Link to="/listings" className="btn btn-primary">Deep search</Link>
           </div>
