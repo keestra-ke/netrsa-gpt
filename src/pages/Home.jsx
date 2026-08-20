@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Droplets } from 'lucide-react';
+import { useSyncExternalStore } from 'react';
 import {
-  housingListings,
   liveFeed,
   serviceModules,
   buildingPulseData,
   stats
 } from '../data/dummyData';
+import { getAllListings } from '../lib/listings';
+import { subscribeListings } from '../lib/storage';
 
 const feedKind = {
   new: { label: 'New vacant', className: 'badge-success' },
@@ -19,6 +21,21 @@ const feedKind = {
 };
 
 function Home() {
+  const allListings = useSyncExternalStore(subscribeListings, getAllListings, getAllListings);
+  const posted = allListings.filter((item) => item.source === 'user');
+  const feed = [
+    ...posted.slice(0, 5).map((item) => ({
+      id: `posted-${item.id}`,
+      kind: item.promoted ? 'promoted' : 'new',
+      time: item.posted,
+      estate: item.estate,
+      text: `${item.verified ? 'Verified landlord' : 'New'}: ${item.title} — KSh ${item.price.toLocaleString()}.`,
+      listingId: item.id,
+      people: item.views || 0
+    })),
+    ...liveFeed
+  ];
+  const preview = allListings.slice(0, 3);
   return (
     <div>
       <section className="hero hero-feed">
@@ -40,8 +57,8 @@ function Home() {
               <MapPin size={20} />
               Open Mtaa View
             </Link>
-            <Link to="/listings" className="btn btn-secondary">
-              Deep search houses
+            <Link to="/post" className="btn btn-secondary">
+              Post a vacancy
             </Link>
           </div>
         </div>
@@ -75,7 +92,7 @@ function Home() {
             <p>The app does not start with a search bar. It starts with what is happening right now.</p>
           </div>
           <div className="feed-list">
-            {liveFeed.map((item) => {
+            {feed.map((item) => {
               const kind = feedKind[item.kind] || feedKind.new;
               const inner = (
                 <>
@@ -126,7 +143,7 @@ function Home() {
             <p>Exact building. Exact floor. Exact room. Nothing is “general area” anymore.</p>
           </div>
           <div className="listings-grid">
-            {housingListings.slice(0, 3).map((listing) => (
+            {preview.map((listing) => (
               <Link key={listing.id} to={`/listings/${listing.id}`} className="card listing-card listing-link">
                 <img src={listing.image} alt={listing.title} className="listing-image" />
                 <div className="listing-details">

@@ -1,29 +1,34 @@
 # Keja Scan Kenya (Vacant Kenya)
 
-Stage 1 website for a GPS housing and estate-life map of Nairobi. You open a live feed — not a search bar — then explore houses, **Mtaa View**, services, and the community board.
+Live website: [keestra-ke.github.io/netrsa-gpt](https://keestra-ke.github.io/netrsa-gpt/)
 
-Live site: [keestra-ke.github.io/netrsa-gpt](https://keestra-ke.github.io/netrsa-gpt/)
+Landlords and agents can **post vacancies** (photos, estate pin, features, WhatsApp/call). Listings expire after 30 days. Accounts live on this device until a backend is added. Roadmap: `ROADMAP.md`.
 
-## Demo routes
+## Routes
 
-- `/` live housing feed
-- `/listings` deep search · `/listings/:id` full room (rules, utilities, caretaker)
-- `/map` Mtaa View layers (housing, services, community)
-- `/services` movers, vibarua, water, security, network, venues, door breaker
-- `/community` building notices · `/pulse` `/jobs` `/marketplace`
+- `/` live feed
+- `/auth` tenant / landlord / agent (demo SMS code **1234**)
+- `/post` publish a vacancy
+- `/dashboard` views, inquiries, renew, mark taken
+- `/listings` search · `/listings/:id` room
+- `/map` Mtaa View
 
-Dummy Nairobi data only. No backend or M-Pesa yet. The long product write-up is `vacant_kenya_concept.md`.
-
-## Local development
+## Web
 
 ```bash
 npm ci
 npm run dev
 ```
 
+Pushes to `main` deploy GitHub Pages.
+
+## Android APK
+
 ```bash
-npm run build
-npm run preview
+npm ci
+npm run build:apk
 ```
 
-Pushes to `main` deploy `dist/` to GitHub Pages at `/netrsa-gpt/`.
+The debug APK is `android/app/build/outputs/apk/debug/app-debug.apk`. Enable **Install unknown apps**, then open the file on the phone. Play Store comes after a Google Play developer account.
+
+Posted listings are stored in the app/browser. They are not yet a shared Nairobi database.

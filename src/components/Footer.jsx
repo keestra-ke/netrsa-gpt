@@ -22,6 +22,7 @@ function Footer() {
           <div>
             <h3>Quick Links</h3>
             <ul>
+              <li><Link to="/post">Post a vacancy</Link></li>
               <li><Link to="/listings">Houses</Link></li>
               <li><Link to="/map">Mtaa View</Link></li>
               <li><Link to="/services">Services</Link></li>
