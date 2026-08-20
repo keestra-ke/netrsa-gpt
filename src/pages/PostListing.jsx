@@ -210,6 +210,7 @@ function PostListing() {
           <label>
             Photos (interior, exterior, bathroom, kitchen — up to 6)
             <input type="file" accept="image/*" multiple onChange={onPhotos} />
+            <span className="tv-file-note">On TV, skip photos or add them later from a phone. The remote cannot open the gallery easily.</span>
           </label>
           {photos.length > 0 && (
             <div className="photo-row">

@@ -64,7 +64,7 @@ function Listings() {
 
         <div className="listings-grid">
           {filteredListings.map((listing) => (
-            <article key={listing.id} className="card listing-card">
+            <Link key={listing.id} to={`/listings/${listing.id}`} className="card listing-card listing-link">
               <img src={listing.image} alt={listing.title} className="listing-image" />
               <div className="listing-details">
                 <div className="listing-price">KSh {listing.price.toLocaleString()}/month</div>
@@ -90,11 +90,11 @@ function Listings() {
                   </span>
                 </div>
                 <div className="detail-actions tight">
-                  <Link to={`/listings/${listing.id}`} className="btn btn-primary">View the room</Link>
+                  <span className="btn btn-primary">View the room</span>
                 </div>
                 <p className="muted center-note">Posted {listing.posted} · {listing.views || 0} views</p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

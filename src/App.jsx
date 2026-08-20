@@ -14,6 +14,8 @@ import Community from './pages/Community';
 import Auth from './pages/Auth';
 import PostListing from './pages/PostListing';
 import Dashboard from './pages/Dashboard';
+import RemoteHint from './components/RemoteHint';
+import TvRouteFocus from './components/TvRouteFocus';
 
 const basename = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
 
@@ -22,7 +24,9 @@ function App() {
     <AuthProvider>
       <BrowserRouter basename={basename}>
         <div className="app">
+          <TvRouteFocus />
           <Navbar />
+          <RemoteHint />
           <main>
             <Routes>
               <Route path="/" element={<Home />} />

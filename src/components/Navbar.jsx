@@ -48,6 +48,7 @@ function Navbar() {
             type="button"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
+            tabIndex={-1}
             onClick={() => setIsOpen((open) => !open)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
